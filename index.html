@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moliam — Elite AI Infrastructure & Digital Growth</title>
+    <meta name="description" content="Moliam delivers enterprise-grade AI APIs and digital growth solutions. Atlas multi-agent knowledge API, SEO automation, and AI-powered website creation.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #030405;
+            --bg-2: #0a0c0f;
+            --surface: #11151a;
+            --surface-2: #1a1f26;
+            --text: #ffffff;
+            --text-2: #a4abb6;
+            --text-3: #6b727e;
+            --gold: #c9a24a;
+            --gold-2: #d8b867;
+            --gold-dim: rgba(201, 162, 74, 0.1);
+            --cyan: #6bd4e0;
+            --violet: #9c8cff;
+            --success: #5acf8e;
+            --error: #ff6b6b;
+            --gradient-gold: linear-gradient(135deg, #c9a24a 0%, #d8b867 50%, #f0d78c 100%);
+            --gradient-dark: linear-gradient(180deg, #030405 0%, #0a0c0f 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(1200px 800px at 20% 0%, rgba(201, 162, 74, 0.15), transparent 60%),
+                radial-gradient(1000px 600px at 80% 20%, rgba(107, 212, 224, 0.08), transparent 55%),
+                radial-gradient(800px 600px at 50% 100%, rgba(156, 140, 255, 0.06), transparent 60%),
+                var(--bg);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 4, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            background: var(--gradient-gold);
+            color: var(--bg) !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600 !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gold-dim);
+            border: 1px solid rgba(201, 162, 74, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-2);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--bg);
+            box-shadow: 0 4px 20px rgba(201, 162, 74, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 162, 74, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--surface-2);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-2);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-3);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Services Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-2);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: rgba(201, 162, 74, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gold-dim);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: var(--text-2);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* API Showcase */
+        .api-showcase {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid var(--surface-2);
+        }
+
+        .code-block {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--surface-2);
+        }
+
+        .code-block .comment { color: var(--text-3); }
+        .code-block .string { color: var(--success); }
+        .code-block .key { color: var(--cyan); }
+        .code-block .value { color: var(--gold); }
+
+        /* Features List */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-2);
+        }
+
+        .feature-item::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: var(--surface);
+            margin: 4rem 0;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px 400px at 50% 0%, rgba(201, 162, 74, 0.1), transparent);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-2);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--surface-2);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-copy {
+            color: var(--text-3);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: 1fr; }
+            .features-list { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">MOLIAM</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#api">API</a>
+            <a href="#about">About</a>
+            <a href="https://atlas.moliam.com/docs" class="nav-cta">API Docs</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Systems Operational</div>
+            <h1>Elite <span>AI Infrastructure</span><br>for Digital Growth</h1>
+            <p class="hero-subtitle">
+                Moliam powers the next generation of AI-driven businesses. 
+                From enterprise-grade APIs to automated SEO and AI website creation, 
+                we deliver the infrastructure that scales with your ambition.
+            </p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="https://atlas.moliam.com/docs" class="btn btn-secondary">API Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">&lt;200ms</div>
+            <div class="stat-label">API Response Time</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">117</div>
+            <div class="stat-label">Knowledge Entries</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">&lt;2ms</div>
+            <div class="stat-label">Memory Queries</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">System Uptime</div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Comprehensive solutions designed to accelerate your digital presence and business growth.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Atlas AI API</h3>
+                <p>Multi-agent knowledge API with OpenAI-compatible endpoints. Drop it into any product for instant AI capabilities with persistent knowledge base.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>AI Website Creation</h3>
+                <p>Professional websites generated in minutes. AI-powered design, copywriting, and optimization that converts visitors into customers.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>SEO Management</h3>
+                <p>Automated SEO optimization that continuously improves your search rankings. Technical SEO, content strategy, and performance monitoring.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Social Media Automation</h3>
+                <p>AI-driven social media management. Content generation, scheduling, engagement tracking, and growth analytics across all platforms.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>Custom AI Agents</h3>
+                <p>Build specialized AI agents for your business. Customer support, sales automation, knowledge management, and workflow optimization.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3>Enterprise Security</h3>
+                <p>Bank-grade security with multi-tenant isolation, role-based access control, audit logging, and compliance-ready infrastructure.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Showcase -->
+    <section class="section" id="api">
+        <div class="section-header">
+            <h2>Atlas API</h2>
+            <p>OpenAI-compatible API with advanced features for production deployments.</p>
+        </div>
+        
+        <div class="api-showcase">
+            <h3 style="margin-bottom: 1rem;">Simple Integration</h3>
+            <div class="code-block">
+<span class="comment"># Chat with Toby - your AI assistant</span>
+curl -X POST https://atlas.moliam.com/v1/chat/completions \\
+  -H <span class="string">"Authorization: Bearer YOUR_API_KEY"</span> \\
+  -H <span class="string">"Content-Type: application/json"</span> \\
+  -d '{
+    <span class="key">"model"</span>: <span class="value">"nous-hermes2:latest"</span>,
+    <span class="key">"messages"</span>: [{<span class="key">"role"</span>: <span class="string">"user"</span>, <span class="key">"content"</span>: <span class="string">"What is Atlas?"</span>}]
+  }'
+            </div>
+            
+            <div class="features-list">
+                <div class="feature-item">OpenAI-compatible endpoints</div>
+                <div class="feature-item">Streaming responses (SSE)</div>
+                <div class="feature-item">Persistent knowledge base</div>
+                <div class="feature-item">Multi-tenant isolation</div>
+                <div class="feature-item">Document upload (PDF, TXT, MD)</div>
+                <div class="feature-item">Semantic search with vectors</div>
+                <div class="feature-item">Session management</div>
+                <div class="feature-item">Role-based access control</div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="https://atlas.moliam.com/docs" class="btn btn-primary">View Full API Docs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Scale?</h2>
+                <p>Join companies leveraging Moliam's AI infrastructure for digital growth. Get started in minutes.</p>
+                <div class="hero-buttons">
+                    <a href="mailto:contact@moliam.com" class="btn btn-primary">Contact Sales</a>
+                    <a href="https://atlas.moliam.com/docs" class="btn btn-secondary">Start Building</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">MOLIAM</div>
+        <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="https://atlas.moliam.com/docs">API Docs</a>
+            <a href="mailto:contact@moliam.com">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 Moliam. Elite AI Infrastructure & Digital Growth.</p>
+    </footer>
+</body>
+</html>
